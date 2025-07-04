@@ -6,6 +6,8 @@ import RecipesPage from './pages/RecipesPage';
 import FavoritesPage from './pages/FavoritesPage';
 import CreateRecipePage from './pages/CreateRecipePage';
 import RecipeDetailPage from './pages/RecipeDetailPage';
+import StatsPage from './pages/StatsPage';
+import DemoFilterPage from './pages/DemoFilterPage';
 import './App.css';
 
 function App() {
@@ -21,6 +23,8 @@ function App() {
               <Route path="/favoritas" element={<FavoritesPage />} />
               <Route path="/crear" element={<CreateRecipePage />} />
               <Route path="/receta/:id" element={<RecipeDetailPage />} />
+              <Route path="/estadisticas" element={<StatsPage />} />
+              <Route path="/demo" element={<DemoFilterPage />} />
             </Routes>
           </main>
         </div>

@@ -8,7 +8,7 @@ const CreateRecipePage: React.FC = () => {
   const { addReceta } = useRecipes();
   const nombreInputRef = useRef<HTMLInputElement>(null);
 
-  // Estados para el formulario controlado
+  
   const [formData, setFormData] = useState<RecipeFormData>({
     nombre: '',
     ingredientes: '',
@@ -22,14 +22,14 @@ const CreateRecipePage: React.FC = () => {
   const [errors, setErrors] = useState<RecipeFormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // useEffect para enfocar el primer input al cargar la página
+  
   React.useEffect(() => {
     if (nombreInputRef.current) {
       nombreInputRef.current.focus();
     }
   }, []);
 
-  // Función para manejar cambios en los inputs
+  
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
@@ -39,7 +39,7 @@ const CreateRecipePage: React.FC = () => {
       [name]: name === 'tiempo' || name === 'porciones' ? Number(value) : value
     }));
 
-    // Limpiar error del campo cuando el usuario empiece a escribir
+    
     if (errors[name as keyof RecipeFormErrors]) {
       setErrors(prev => ({
         ...prev,
@@ -80,7 +80,7 @@ const CreateRecipePage: React.FC = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  // Función para manejar el envío del formulario
+  
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
@@ -91,13 +91,13 @@ const CreateRecipePage: React.FC = () => {
     setIsSubmitting(true);
 
     try {
-      // Simular delay de red
+      
       await new Promise(resolve => setTimeout(resolve, 1000));
 
-      // Procesar los datos del formulario
+    
       const nuevaReceta = {
         nombre: formData.nombre.trim(),
-        imagen: '/placeholder-recipe.svg', // Imagen por defecto
+        imagen: '/placeholder-recipe.svg',
         ingredientes: formData.ingredientes
           .split('\n')
           .map(ing => ing.trim())
@@ -110,12 +110,12 @@ const CreateRecipePage: React.FC = () => {
         dificultad: formData.dificultad as 'fácil' | 'medio' | 'difícil',
         categoria: formData.categoria.trim().toLowerCase(),
         porciones: formData.porciones,
-        valoracion: 4.0 // Valoración por defecto
+        valoracion: 4.0 
       };
 
       addReceta(nuevaReceta);
       
-      // Mostrar mensaje de éxito y redirigir
+      
       alert('¡Receta creada exitosamente! 🎉');
       navigate('/recetas');
       

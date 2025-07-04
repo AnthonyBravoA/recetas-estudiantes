@@ -3,7 +3,7 @@
     {
       "id": 1,
       "nombre": "Pasta Universitaria Rápida",
-      "imagen": "/placeholder-recipe.svg",
+      "imagen": "https://media.istockphoto.com/id/1200136076/es/foto/tacos-de-la-calle-del-camar%C3%B3n.jpg?s=612x612&w=0&k=20&c=25TOAof3DN-tFcIhRwq87DUuaIPFv9OYp8YpwASBfbo=",
       "ingredientes": ["400g pasta", "1 lata tomate triturado", "2 dientes ajo", "100g queso parmesano", "Aceite de oliva", "Sal y pimienta"],
       "pasos": [
         "Hervir agua con sal y cocinar la pasta según instrucciones",
