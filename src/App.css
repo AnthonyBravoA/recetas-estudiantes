@@ -173,7 +173,8 @@ body {
 
 /* Sections */
 .featured-section,
-.quick-section {
+.quick-section,
+.quick-filters {
   margin-bottom: 3rem;
 }
 

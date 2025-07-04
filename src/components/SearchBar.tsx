@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useRecipeFilters } from '../hooks/useRecipes';
+import { useRecipes } from '../hooks/useRecipes';
 
 interface SearchBarProps {
   onSearch: (results: any[]) => void;
@@ -14,10 +14,19 @@ const SearchBar: React.FC<SearchBarProps> = ({
 }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedDifficulty, setSelectedDifficulty] = useState('');
-  const { filterByDifficulty, getDifficultyLevels, recetas } = useRecipeFilters();
+  const { recetas } = useRecipes();
+
+  // Obtener niveles de dificultad únicos
+  const getDifficultyLevels = (): string[] => {
+    const difficulties = Array.from(new Set(recetas.map(receta => receta.dificultad)));
+    return difficulties.sort((a, b) => {
+      const order = { 'fácil': 1, 'medio': 2, 'difícil': 3 };
+      return (order[a as keyof typeof order] || 4) - (order[b as keyof typeof order] || 4);
+    });
+  };
 
   const handleSearch = (term: string, difficulty: string) => {
-    let filteredRecetas = recetas;
+    let filteredRecetas = [...recetas];
 
     // Filtrar por término de búsqueda
     if (term.trim()) {
@@ -32,18 +41,9 @@ const SearchBar: React.FC<SearchBarProps> = ({
 
     // Filtrar por dificultad
     if (difficulty) {
-      filteredRecetas = filterByDifficulty(difficulty);
-      
-      // Si también hay término de búsqueda, aplicar ambos filtros
-      if (term.trim()) {
-        filteredRecetas = filteredRecetas.filter(receta =>
-          receta.nombre.toLowerCase().includes(term.toLowerCase()) ||
-          receta.ingredientes.some(ingrediente =>
-            ingrediente.toLowerCase().includes(term.toLowerCase())
-          ) ||
-          receta.categoria.toLowerCase().includes(term.toLowerCase())
-        );
-      }
+      filteredRecetas = filteredRecetas.filter(receta => 
+        receta.dificultad.toLowerCase() === difficulty.toLowerCase()
+      );
     }
 
     onSearch(filteredRecetas);
